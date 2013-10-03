@@ -27,22 +27,25 @@ has logger => (
 
 sub _build_logger {
     my ($self) = @_;
-    return Log::Any->get_logger( category => $self->_category );
+    return Log::Any->get_logger( category => $self->_logger_category );
 }
 
-has _category => (
+has _logger_category => (
     is  => 'lazy',
     isa => Str,
 );
 
-=method _build__category
+=method _build__logger_category
 
 Override to set the category used for logging.  Defaults to the class name of
-the object (which could be a subclass).
+the object (which could be a subclass).  You can override to lock it to a
+particular name:
+
+    sub _build__logger_category { __PACKAGE__ }
 
 =cut
 
-sub _build__category { return ref $_[0] }
+sub _build__logger_category { return ref $_[0] }
 
 1;
 
@@ -83,10 +86,28 @@ This role lets you do your part and leaves actual log setup and routing to
 someone else.
 
 The application that ultimately uses your module can then choose to direct log
-messages somewhere based on its own needs and configuration.
+messages somewhere based on its own needs and configuration with
+L<Log::Any::Adapter>.
 
 This role is based on L<Moo> so should work with either L<Moo> or L<Moose>
 based classes.
+
+=head1 CUSTOMIZING
+
+If you have a whole set of classes that should log with a single category,
+create your own role and set the C<_build__logger_category> there:
+
+    package MyLibrary::Role::Logger;
+    use Moo::Role;
+    with 'MooseX::Role::Logger';
+
+    sub _build__logger_category { "MyLibrary" }
+
+Then in your other classes, use your custom role:
+
+    package MyLibrary::Foo;
+    use Moo;
+    with 'MyLibrary::Role::Logger'
 
 =head1 SEE ALSO
 
