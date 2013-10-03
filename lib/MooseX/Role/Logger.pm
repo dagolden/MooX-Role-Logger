@@ -78,8 +78,8 @@ role doesn't need to know or care about the details of log configuration,
 implementation or destination.
 
 Use it when you want your module to offer logging capabilities, but don't know
-who is going to use your module or what kind of logging they will implement,
-this role lets you do your part and leaves actual log setup and routing to
+who is going to use your module or what kind of logging they will implement.
+This role lets you do your part and leaves actual log setup and routing to
 someone else.
 
 The application that ultimately uses your module can then choose to direct log
