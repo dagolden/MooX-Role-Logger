@@ -7,5 +7,5 @@ use MyModule;
 use Log::Any::Adapter ('Stdout');
 
 my $obj = MyModule->new;
-$obj->cry;
+$obj->run;
 
