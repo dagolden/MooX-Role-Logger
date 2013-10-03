@@ -7,7 +7,7 @@ package MooseX::Role::Logger;
 # VERSION
 
 use Moo::Role;
-use Types::Standard qw/InstanceOf Str/;
+use Types::Standard qw/Str/;
 
 use Log::Any ();
 
@@ -18,10 +18,8 @@ Returns a logging object.  See L<Log::Any> for a list of logging methods it acce
 =cut
 
 has logger => (
-    is => 'lazy',
-    # Log::Any::Proxy will be in next-gen Log::Any and replace Log::Any::Adapter::*
-    isa =>
-      InstanceOf [qw/Log::Any::Proxy Log::Any::Adapter::Base Log::Any::Adapter::Null/],
+    is       => 'lazy',
+    isa      => sub { ref( $_[0] ) =~ /^Log::Any/ }, # XXX too many options
     init_arg => undef,
 );
 
