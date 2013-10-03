@@ -7,7 +7,7 @@ use Test::FailWarnings;
 use Log::Any::Test;
 use Log::Any qw/$log/;
 
-use lib 'example';
+use lib 't/lib';
 
 use MyModule;
 
