@@ -62,7 +62,7 @@ In your modules:
 
     sub cry {
         my ($self) = @_;
-        $self->logger->info("I'm feeling sad");
+        $self->logger->info("I'm sad");
     }
 
 In your application:
@@ -87,10 +87,30 @@ The application that ultimately uses your module can then choose to direct log
 messages somewhere based on its own needs and configuration with
 L<Log::Any::Adapter>.
 
-This role is based on L<Moo> so should work with either L<Moo> or L<Moose>
+This role is based on L<Moo> so it should work with either L<Moo> or L<Moose>
 based classes.
 
-=head1 CUSTOMIZING
+=head1 USAGE
+
+=head2 Testing
+
+Testing with L<Log::Any> is pretty easy, thanks to L<Log::Any::Test>.
+Just load that before L<Log::Any> loads and your log messages get
+sent to a test adapter that includes testing methods:
+
+    use Test::More 0.96;
+    use Log::Any::Test;
+    use Log::Any qw/$log/;
+
+    use lib 't/lib';
+    use MyModule;
+
+    MyModule->new->cry;
+    $log->contains_ok( qr/I'm sad/, "got log message" );
+
+    done_testing;
+
+=head2 Customizing
 
 If you have a whole set of classes that should log with a single category,
 create your own role and set the C<_build__logger_category> there:
@@ -109,11 +129,28 @@ Then in your other classes, use your custom role:
 
 =head1 SEE ALSO
 
+Since MooseX::Role::Logger is universal, you have to use it with one of
+several L<Log::Any::Adapter> classes:
+
 =for :list
-* L<MooseX::Role::Loggable>
-* L<MooseX::Role::LogHandler>
+* L<Log::Any::Adapter::File>
+* L<Log::Any::Adapter::Stderr>
+* L<Log::Any::Adapter::Stdout>
+* L<Log::Any::Adapter::ScreenColoredLevel>
+* L<Log::Any::Adapter::Dispatch>
+* L<Log::Any::Adapter::Syslog>
+* L<Log::Any::Adapter::Log4perl>
+
+These other logging roles are specific to particular logging packages, rather
+than being universal:
+
+=for :list
+* L<MooseX::LazyLogDispatch>
 * L<MooseX::Log::Log4perl>
-* L<MooseX::Log::Dispatch>
+* L<MooseX::LogDispatch>
+* L<MooseX::Role::LogHandler>
+* L<MooseX::Role::Loggable> (uses L<Log::Dispatchouli>)
+* L<Role::Log::Syslog::Fast>
 
 =cut
 
