@@ -14,7 +14,7 @@ sub run {
 
 sub cry {
     my ($self) = @_;
-    $self->logger->info("I'm sad");
+    $self->_logger->info("I'm sad");
 }
 
 1;

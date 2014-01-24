@@ -13,7 +13,7 @@ use MyModule;
 
 my $obj = new_ok('MyModule');
 
-my $log_class = ref $obj->logger;
+my $log_class = ref $obj->_logger;
 like( $log_class, qr/^Log::Any/, "logger came is from Log::Any" );
 
 $obj->cry;

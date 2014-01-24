@@ -11,19 +11,19 @@ use Types::Standard qw/Str/;
 
 use Log::Any ();
 
-=method logger
+=method _logger
 
 Returns a logging object.  See L<Log::Any> for a list of logging methods it accepts.
 
 =cut
 
-has logger => (
+has _logger => (
     is       => 'lazy',
     isa      => sub { ref( $_[0] ) =~ /^Log::Any/ }, # XXX too many options
     init_arg => undef,
 );
 
-sub _build_logger {
+sub _build__logger {
     my ($self) = @_;
     return Log::Any->get_logger( category => $self->_logger_category );
 }
@@ -62,7 +62,7 @@ In your modules:
 
     sub cry {
         my ($self) = @_;
-        $self->logger->info("I'm sad");
+        $self->_logger->info("I'm sad");
     }
 
 In your application:
