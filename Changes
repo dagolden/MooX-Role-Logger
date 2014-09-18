@@ -1,6 +1,14 @@
-Revision history for MooseX-Role-Logger
+Revision history for MooX-Role-Logger
 
 {{$NEXT}}
+
+    [Changed]
+
+    - Renamed to MooX::Role::Logger for clarify that it works with Moo or
+      Moose.
+
+    - MooseX::Role::Logger deprecated but kept as a wrapper for backwards
+      compatibility.
 
 0.003     2014-07-03 12:38:11-04:00 America/New_York
 
