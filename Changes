@@ -2,6 +2,11 @@ Revision history for MooX-Role-Logger
 
 {{$NEXT}}
 
+    [Changed]
+
+    - Dropped dependency on Types::Standard.  The logging category
+      will be coerced to a string automatically rather than validated.
+
 0.004     2014-09-18 10:32:10-04:00 America/New_York
 
     [Changed]

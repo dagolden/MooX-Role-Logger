@@ -1,6 +1,5 @@
 requires "Log::Any" => "0";
 requires "Moo::Role" => "0";
-requires "Types::Standard" => "0";
 requires "perl" => "5.006";
 requires "strict" => "0";
 requires "warnings" => "0";
