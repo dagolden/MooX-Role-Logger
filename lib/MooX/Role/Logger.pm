@@ -131,7 +131,7 @@ several L<Log::Any::Adapter> classes:
 * L<Log::Any::Adapter::File>
 * L<Log::Any::Adapter::Stderr>
 * L<Log::Any::Adapter::Stdout>
-* L<Log::Any::Adapter::ScreenColoredLevel>
+* L<Log::Any::Adapter::Screen>
 * L<Log::Any::Adapter::Dispatch>
 * L<Log::Any::Adapter::Syslog>
 * L<Log::Any::Adapter::Log4perl>
